@@ -1,4 +1,5 @@
 import React from 'react'
+import { Pencil, Trash2 } from 'lucide-react'
 
 function App() {
   return (
@@ -32,14 +33,31 @@ function App() {
                 <div>1</div>
                 <div>Joko Sampurno</div>
                 <div>082399787666</div>
-                <div>add/edit</div>
+                <div className="flex gap-2">
+                  <button>
+                    <Pencil className="w-4 h-4"></Pencil>
+                  </button>
+
+                  <button>
+                    <Trash2 className="w-4 h-4"></Trash2>
+                  </button>
+                </div>
             </div>
 
-            <div className="flex justify-between items-center text-black p-2">
-                <div>1</div>
-                <div>Joko Sampurno</div>
+            
+            <div className="flex justify-between text-black p-2">
+                <div>2</div>
+                <div>Bono supono</div>
                 <div>082399787666</div>
-                <div>add/edit</div>
+                <div className="flex gap-2">
+                  <button>
+                    <Pencil className="w-4 h-4"></Pencil>
+                  </button>
+
+                  <button>
+                    <Trash2 className="w-4 h-4"></Trash2>
+                  </button>
+                </div>
             </div>
           </div>
         </div>
