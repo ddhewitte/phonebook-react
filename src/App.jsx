@@ -1,7 +1,21 @@
-import React from 'react'
+import {React, useEffect, useState} from 'react'
 import { Pencil, Trash2 } from 'lucide-react'
+import axios from 'axios'
+
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
 function App() {
+
+  const [person, setPerson] = useState([]);
+
+  useEffect(() => {
+    fetchPhoneBook();
+  }, [])
+
+  async function fetchPhoneBook(){
+    const response = await axios.get(API_ENDPOINT);
+    setPerson(response.data);
+  }
   return (
     <div className="container">
       <div className="bg-white min-h-screen">
@@ -29,36 +43,25 @@ function App() {
           <div className="max-w-full p-4 bg-white border border-gray-500 rounded-md mb-2 gap-4 text-white">
             <h2 className="font-bold text-black">Phonebook Lists</h2>
 
-            <div className="flex justify-between items-center text-black p-2">
-                <div>1</div>
-                <div>Joko Sampurno</div>
-                <div>082399787666</div>
-                <div className="flex gap-2">
-                  <button>
-                    <Pencil className="w-4 h-4"></Pencil>
-                  </button>
+            {
+              person.map((user) => (
+                  <div className="flex justify-between items-center text-black p-2" key={user.id}>
+                      <div>{user.id}</div>
+                      <div>{user.name}</div>
+                      <div>{user.phone_number}</div>
+                      <div className="flex gap-2">
+                        <button>
+                          <Pencil className="w-4 h-4"></Pencil>
+                        </button>
 
-                  <button>
-                    <Trash2 className="w-4 h-4 text-red-700"></Trash2>
-                  </button>
-                </div>
-            </div>
+                        <button>
+                          <Trash2 className="w-4 h-4 text-red-700"></Trash2>
+                        </button>
+                      </div>
+                  </div>
+              ))
+            }
 
-            
-            <div className="flex justify-between text-black p-2">
-                <div>2</div>
-                <div>Bono supono</div>
-                <div>082399787666</div>
-                <div className="flex gap-2">
-                  <button>
-                    <Pencil className="w-4 h-4"></Pencil>
-                  </button>
-
-                  <button>
-                    <Trash2 className="w-4 h-4 text-red-700"></Trash2>
-                  </button>
-                </div>
-            </div>
           </div>
         </div>
       </div>
