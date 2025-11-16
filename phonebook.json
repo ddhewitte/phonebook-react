@@ -1,9 +1,0 @@
-{
-    "phonebook": [
-        {
-            "id" : 1,
-            "name" : "Adji Hendrawan", 
-            "phone_number" : "08487653553"
-        }
-    ]
-}
