@@ -39,7 +39,7 @@ function App() {
                   </button>
 
                   <button>
-                    <Trash2 className="w-4 h-4"></Trash2>
+                    <Trash2 className="w-4 h-4 text-red-700"></Trash2>
                   </button>
                 </div>
             </div>
@@ -55,7 +55,7 @@ function App() {
                   </button>
 
                   <button>
-                    <Trash2 className="w-4 h-4"></Trash2>
+                    <Trash2 className="w-4 h-4 text-red-700"></Trash2>
                   </button>
                 </div>
             </div>
