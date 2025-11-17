@@ -75,15 +75,15 @@ function App() {
               </form>
           </div>
 
-          <div className="max-w-full p-4 bg-white border border-gray-500 rounded-md mb-2 gap-4 text-white">
+          <div className="max-w-full p-4 bg-white border border-gray-500 rounded-md mb-2 gap-4 overflow-x-auto text-white">
             <h2 className="font-bold text-black">Phonebook Lists</h2>
 
             {
               person.map((user) => (
-                  <div className="flex justify-between items-center text-black p-2" key={user.id}>
+                  <div className="grid grid-cols-4 gap-30 text-black p-2" key={user.id}>
                       <div>{user.id}</div>
                       <div>{user.name}</div>
-                      <div>{user.phone_number}</div>
+                      <div>{user.phone}</div>
                       <div className="flex gap-2">
                         <button>
                           <Pencil className="w-4 h-4"></Pencil>
