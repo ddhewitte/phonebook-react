@@ -10,6 +10,7 @@ function App() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [button, setButton] = useState('add');
+  const [existingId, setExistingId] = useState(0);
 
   useEffect(() => {
     fetchPhoneBook();
@@ -26,7 +27,7 @@ function App() {
     if(button === 'add') {
       await addPerson(e);
     }else{
-      editPersonToAPI();
+      await editPersonToAPI(e);
     }
   }
 
@@ -36,9 +37,7 @@ function App() {
     if(!name || !phone) return;
     const responseAdd = await axios.post(API_ENDPOINT, { name, phone});
     if(responseAdd){
-      setName('');
-      setPhone('');
-      fetchPhoneBook();
+      emptyStateAll();
     }
   }
 
@@ -46,11 +45,24 @@ function App() {
   const editPerson = (user) => {
     setName(user.name);
     setPhone(user.phone);
+    setExistingId(user.id);
     setButton('edit');
   }
 
-  const editPersonToAPI = () => {
-    console.log('iye..')
+  const editPersonToAPI = async (e) => {
+    if(!name || !phone) return;
+    const updateData = await axios.put(API_ENDPOINT + '/' + existingId, {name, phone})
+    if(updateData){
+      emptyStateAll();
+    }
+  }
+
+  const emptyStateAll = () => {
+    setName('');
+    setPhone('');
+    fetchPhoneBook();
+    setExistingId(0);
+    setButton('add');
   }
 
   return (
