@@ -80,7 +80,7 @@ function App() {
 
             {
               person.map((user) => (
-                  <div className="grid grid-cols-4 gap-30 text-black p-2" key={user.id}>
+                  <div className="grid grid-cols-4 gap-30 text-black p-2 border-b border-gray-300" key={user.id}>
                       <div>{user.id}</div>
                       <div>{user.name}</div>
                       <div>{user.phone}</div>
