@@ -9,6 +9,7 @@ function App() {
   const [person, setPerson] = useState([]);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [button, setButton] = useState('add');
 
   useEffect(() => {
     fetchPhoneBook();
@@ -18,6 +19,15 @@ function App() {
   async function fetchPhoneBook(){
     const response = await axios.get(API_ENDPOINT);
     setPerson(response.data);
+  }
+
+  const actionCheck = async (e) => {
+    e.preventDefault();
+    if(button === 'add') {
+      await addPerson(e);
+    }else{
+      editPersonToAPI();
+    }
   }
 
   //add data
@@ -32,6 +42,17 @@ function App() {
     }
   }
 
+  //edit data - set existing
+  const editPerson = (user) => {
+    setName(user.name);
+    setPhone(user.phone);
+    setButton('edit');
+  }
+
+  const editPersonToAPI = () => {
+    console.log('iye..')
+  }
+
   return (
     <div className="container">
       <div className="bg-white min-h-screen">
@@ -40,7 +61,7 @@ function App() {
           <h1 className="text-2xl font-bold text-black mb-2">Phonebook App</h1>
 
           <div className="max-w-full p-4  bg-[#6a5269] rounded-md mb-2 gap-4 text-white">
-            <form onSubmit={addPerson}>
+            <form onSubmit={actionCheck}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name">Name</label>
@@ -69,7 +90,7 @@ function App() {
                 <button 
                   type="submit" 
                   className="w-auto h-auto p-2 bg-black text-white rounded-md hover:bg-gray-800">
-                  Add to phonebook
+                  {button} to phonebook
                 </button>
               </div>
               </form>
@@ -86,7 +107,7 @@ function App() {
                       <div>{user.phone}</div>
                       <div className="flex gap-2">
                         <button>
-                          <Pencil className="w-4 h-4"></Pencil>
+                          <Pencil className="w-4 h-4" onClick={() => editPerson(user)}></Pencil>
                         </button>
 
                         <button>
