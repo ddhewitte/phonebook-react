@@ -52,9 +52,7 @@ function App() {
   const editPersonToAPI = async (e) => {
     if(!name || !phone) return;
     const updateData = await axios.put(API_ENDPOINT + '/' + existingId, {name, phone})
-    if(updateData){
-      emptyStateAll();
-    }
+    if(updateData) emptyStateAll();
   }
 
   const emptyStateAll = () => {
@@ -63,6 +61,14 @@ function App() {
     fetchPhoneBook();
     setExistingId(0);
     setButton('add');
+  }
+
+  const deleteDataToAPI = async (user) => {
+    const confirm = window.confirm("Yakin mau hapus data phone book ini?");
+    if(!confirm) return;
+
+    const deleteData = await axios.delete(API_ENDPOINT + '/' + user.id);
+    if(deleteData) emptyStateAll();
   }
 
   return (
@@ -119,11 +125,11 @@ function App() {
                       <div>{user.phone}</div>
                       <div className="flex gap-2">
                         <button>
-                          <Pencil className="w-4 h-4" onClick={() => editPerson(user)}></Pencil>
+                          <Pencil className="w-4 h-4 cursor-pointer" onClick={() => editPerson(user)}></Pencil>
                         </button>
 
                         <button>
-                          <Trash2 className="w-4 h-4 text-red-700"></Trash2>
+                          <Trash2 className="w-4 h-4 text-red-700 cursor-pointer" onClick={ () => deleteDataToAPI(user) }></Trash2>
                         </button>
                       </div>
                   </div>
